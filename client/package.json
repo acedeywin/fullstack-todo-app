@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format:fix": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "docker:build": "docker build -t todo-client .",
+    "docker:run": "docker run -p 3000:3000 todo-client",
+    "docker:stop": "docker stop todo-client"
   },
   "dependencies": {
     "@date-io/dayjs": "^3.0.0",
@@ -34,7 +37,7 @@
     "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^2.8.8",
+    "prettier": "^3.4.2",
     "typescript": "^5"
   }
 }

@@ -107,7 +107,13 @@ const TodoForm: React.FC<Props> = ({ onClose, initialData }) => {
             },
           }}
         />
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: '0 5px 10px 5px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '0 5px 10px 5px',
+          }}
+        >
           <Button
             disabled={handleDisableButton()}
             variant="contained"

@@ -3,6 +3,6 @@ import todoRoutes from "./TodoRoutes";
 
 const routes = Router();
 
-routes.use("/todo", todoRoutes);
+routes.use("/todos", todoRoutes);
 
 export default routes;

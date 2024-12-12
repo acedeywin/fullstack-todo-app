@@ -6,10 +6,6 @@ const theme = createTheme({
       main: '#3f51b5', // Blue
       contrastText: '#ffffff', // White text on primary
     },
-    secondary: {
-      main: '#f50057', // Pink
-      contrastText: '#ffffff', // White text on secondary
-    },
     background: {
       default: '#f4f6f8', // Light gray background
       paper: '#ffffff', // White background for cards and papers

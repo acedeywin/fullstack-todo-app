@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Paper } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import { useTodoContext } from '../context/TodoContext';
 import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
