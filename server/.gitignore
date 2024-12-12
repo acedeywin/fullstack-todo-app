@@ -1,7 +1,7 @@
 node_modules/
 dist/
 
-# src/infrastructure/data/todos.json
-# !src/infrastructure/data/
+src/infrastructure/data/todos.json
+!src/infrastructure/data/
 
 .env
