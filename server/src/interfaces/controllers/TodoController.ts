@@ -7,19 +7,31 @@ import { DeleteTodo } from "../../application/DeleteTodo";
 import { GetTodo } from "../../application/GetTodo";
 import { Todo } from "../../domain/entities/Todo";
 
+// Initialize the file-based repository for managing To-Do items
 const repository = new FileTodoRepository();
 
+/**
+ * Controller for handling HTTP requests related to To-Do operations.
+ * Acts as the interface layer between the client and application use cases.
+ */
 export class TodoController {
-  static async create(req: Request, res: Response, next: NextFunction) {
+  /**
+   * Handles the creation of a new To-Do item.
+   *
+   * @param req - The incoming HTTP request containing the To-Do data in the body.
+   * @param res - The HTTP response to be sent back to the client.
+   * @param next - Middleware function for error handling.
+   */
+  static async createTodo(req: Request, res: Response, next: NextFunction) {
     try {
       const { content, dueDate } = req.body;
 
       const payload = {
-        content, 
-        dueDate: new Date(dueDate), 
+        content,
+        dueDate: new Date(dueDate),
         createdAt: new Date(),
         updatedAt: new Date(),
-      } as Todo
+      } as Todo;
 
       const useCase = new CreateTodo(repository);
       await useCase.execute(payload);
@@ -31,6 +43,13 @@ export class TodoController {
     }
   }
 
+  /**
+   * Retrieves all To-Do items.
+   *
+   * @param req - The incoming HTTP request.
+   * @param res - The HTTP response containing the list of To-Do items.
+   * @param next - Middleware function for error handling.
+   */
   static async getTodos(req: Request, res: Response, next: NextFunction) {
     try {
       const useCase = new GetTodos(repository);
@@ -47,6 +66,13 @@ export class TodoController {
     }
   }
 
+  /**
+   * Retrieves a single To-Do item by its ID.
+   *
+   * @param req - The incoming HTTP request containing the To-Do ID in the params.
+   * @param res - The HTTP response containing the requested To-Do item.
+   * @param next - Middleware function for error handling.
+   */
   static async getTodo(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -64,7 +90,14 @@ export class TodoController {
     }
   }
 
-  static async update(req: Request, res: Response, next: NextFunction) {
+  /**
+   * Updates an existing To-Do item.
+   *
+   * @param req - The incoming HTTP request containing the To-Do ID in the params and updated data in the body.
+   * @param res - The HTTP response indicating the update was successful.
+   * @param next - Middleware function for error handling.
+   */
+  static async updateTodo(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
       const { content, status, dueDate } = req.body;
@@ -79,7 +112,14 @@ export class TodoController {
     }
   }
 
-  static async delete(req: Request, res: Response, next: NextFunction) {
+  /**
+   * Deletes a specific To-Do item by its ID.
+   *
+   * @param req - The incoming HTTP request containing the To-Do ID in the params.
+   * @param res - The HTTP response indicating the deletion was successful.
+   * @param next - Middleware function for error handling.
+   */
+  static async deleteTodo(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
 

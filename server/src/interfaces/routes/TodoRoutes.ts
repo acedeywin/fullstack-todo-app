@@ -8,7 +8,7 @@ import {
 const todoRoutes = Router();
 
 // Create a new To-Do
-todoRoutes.post("/", validateTodoCreation, TodoController.create);
+todoRoutes.post("/", validateTodoCreation, TodoController.createTodo);
 
 // Get all To-Dos
 todoRoutes.get("/", TodoController.getTodos);
@@ -17,13 +17,9 @@ todoRoutes.get("/", TodoController.getTodos);
 todoRoutes.get("/:id", TodoController.getTodo);
 
 // Update a specific To-Do
-todoRoutes.put(
-  "/:id",
-  validateTodoUpdate,
-  TodoController.update,
-);
+todoRoutes.put("/:id", validateTodoUpdate, TodoController.updateTodo);
 
 // Delete a specific To-Do
-todoRoutes.delete("/:id", TodoController.delete);
+todoRoutes.delete("/:id", TodoController.deleteTodo);
 
 export default todoRoutes;

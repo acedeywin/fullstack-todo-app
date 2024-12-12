@@ -1,10 +1,17 @@
 import { NextFunction, Request, Response } from "express";
-import { body, param, query, validationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 import { TodoStatus } from "../../shared/types/TodoTypes";
 import { BadRequestError } from "../../shared/helpers/Errors";
 
+/**
+ * Middleware to validate the creation of a new To-Do item.
+ * Ensures that required fields are present and valid.
+ */
 export const validateTodoCreation = [
+  // Validate 'content' field
   body("content").isString().notEmpty().withMessage("Content is required."),
+
+  // Validate 'dueDate' field
   body("dueDate")
     .isISO8601()
     .notEmpty()
@@ -13,7 +20,7 @@ export const validateTodoCreation = [
       const today = new Date();
       const inputDate = new Date(value);
 
-      // Set time to 00:00:00 for comparison to ignore the time part
+      // Normalize dates to ignore the time part
       today.setHours(0, 0, 0, 0);
       inputDate.setHours(0, 0, 0, 0);
 
@@ -23,6 +30,7 @@ export const validateTodoCreation = [
       return true;
     }),
 
+  // Final validation result handling
   (req: Request, res: Response, next: NextFunction) => {
     try {
       const errors = validationResult(req);
@@ -37,9 +45,19 @@ export const validateTodoCreation = [
   },
 ];
 
+/**
+ * Middleware to validate updates to an existing To-Do item.
+ * Ensures that optional fields, if provided, are valid.
+ */
 export const validateTodoUpdate = [
-  body("content").isString().optional().notEmpty().withMessage("Content cannot be empty."),
+  // Validate 'content' field if present
+  body("content")
+    .isString()
+    .optional()
+    .notEmpty()
+    .withMessage("Content cannot be empty."),
 
+  // Validate 'status' field if present
   body("status")
     .isString()
     .optional()
@@ -52,6 +70,7 @@ export const validateTodoUpdate = [
       return true;
     }),
 
+  // Validate 'dueDate' field if present
   body("dueDate")
     .isISO8601()
     .optional()
@@ -61,7 +80,7 @@ export const validateTodoUpdate = [
       const today = new Date();
       const inputDate = new Date(value);
 
-      // Set time to 00:00:00 for comparison to ignore the time part
+      // Normalize dates to ignore the time part
       today.setHours(0, 0, 0, 0);
       inputDate.setHours(0, 0, 0, 0);
 
@@ -71,16 +90,17 @@ export const validateTodoUpdate = [
       return true;
     }),
 
-    (req: Request, res: Response, next: NextFunction) => {
-        try {
-          const errors = validationResult(req);
-          if (!errors.isEmpty()) {
-            res.status(403).json({ errors: errors.array() });
-            return;
-          }
-          next();
-        } catch (error) {
-          next(error);
-        }
-      },
+  // Final validation result handling
+  (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.status(403).json({ errors: errors.array() });
+        return;
+      }
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
 ];

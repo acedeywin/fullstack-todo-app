@@ -3,11 +3,6 @@ export enum TodoStatus {
   DONE = "Done",
 }
 
-export interface TodoTypes {
-  id: string;
-  content: string;
-  dueDate: Date;
-  status: TodoStatus;
-  createdAt: Date;
-  updatedAt: Date;
+export interface FileError extends Error {
+  code?: string;
 }

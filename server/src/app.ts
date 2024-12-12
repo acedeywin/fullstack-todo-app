@@ -1,35 +1,20 @@
-import express, { NextFunction, Request, Response } from "express";
-import { errorHandler } from "./shared/helpers/ErrorHandler";
-// import timeout from 'connect-timeout'
+import express, { Request, Response } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
 
+import { errorHandler } from "./shared/helpers/ErrorHandler";
 import routes from "./interfaces/routes";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-// Middleware to set timeout for all requests
-// app.use(timeout('16s')) // Set timeout to 16 seconds
-
-// Middleware to handle timed-out requests
-// app.use((req: Request, res: Response, next: NextFunction) => {
-//     if (!req.timedout) next() // If request did not time out, proceed
-// })
-
-// // Error handler for timed-out requests
-// app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-//     if (err && req.timedout) {
-//         res.status(408).json({
-//             message: 'Request timed out. Check your network connection.',
-//         })
-//         return
-//     } else {
-//         next(err)
-//     }
-// })
+app.use(cors({ origin: process.env.CLIENT_URL }));
 
 // Software accessibility test
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Welcome to Demo Credit!" });
+  res.status(200).json({ message: "Welcome to Todo App!" });
   return;
 });
 
