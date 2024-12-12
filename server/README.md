@@ -56,61 +56,52 @@ src/
 
 ### Explanation of Key Directories
 
-**src/application/:**
-Contains use cases that define application-specific business logic.
-Use cases orchestrate workflows by interacting with the domain layer and repositories.
+-   **src/application/:**
+-   Contains use cases that define application-specific business logic.
+-   Use cases orchestrate workflows by interacting with the domain layer and repositories.
 
-**src/domain/:**
-The core of the application.
-Defines entities, such as Todo, which encapsulate the core business logic and rules.
-Includes the TodoRepository interface to abstract data persistence.
+-   **src/domain/:**
+-   The core of the application.
+-   Defines entities, such as Todo, which encapsulate the core business logic and rules.
+-   Includes the TodoRepository interface to abstract data persistence.
 
-**src/infrastructure/:**
-Implements the infrastructure for data persistence and external services.
-FileTodoRepository.ts provides a file-based implementation of the TodoRepository.
+-   **src/infrastructure/:**
+-   Implements the infrastructure for data persistence and external services.
+-   FileTodoRepository.ts provides a file-based implementation of the TodoRepository.
 
-**src/interfaces/:**
-Handles the interface between the application and external systems (e.g., HTTP requests).
-Contains controllers and routes for exposing API endpoints.
+-   **src/interfaces/:**
+-   Handles the interface between the application and external systems (e.g., HTTP requests).
+-   Contains controllers and routes for exposing API endpoints.
 
-**src/infrastructure/data/:**
-Stores the todos.json file, which acts as the database for this project.
+-   **src/infrastructure/data/:**
+-   Stores the todos.json file, which acts as the database for this project.
 
-**dist/:**
-Contains the compiled JavaScript files, generated from the TypeScript source code.
-
-### Usage
-Run the API:
-Use npm run dev to start the API in development mode.
-Use npm start to run the compiled application.
-
-Docker:
-Build the Docker image: npm run docker:build
-Run the container: npm run docker:run
+-   **dist/:**
+-   Contains the compiled JavaScript files, generated from the TypeScript source code.
 
 ### Endpoints:
 
-### Create a New To-Do
+### 1. Create a New To-Do
 
-**Endpoint**: `/todos`
-**Method**: `POST`
-**Description**: Creates a new To-Do item.
+-   **Endpoint**: `/todos`
+-   **Method**: `POST`
+-   **Description**: Creates a new To-Do item.
 
-**Request Body**
+-   **Request Body**
 ```json
 {
   "content": "Complete project documentation",
   "dueDate": "2024-12-20T00:00:00.000Z"
 }
 ```
-**Response**
+-   **Response**
 ```json
 {
   "message": "To-Do created successfully."
 }
 ```
 
-**Error Response**
+-   **Error Response**
 ```json
 {
   "status": "error",
@@ -124,12 +115,12 @@ Run the container: npm run docker:run
 }
 ```
 
-### List All To-Dos
+### 2. List All To-Dos
 
-**Endpoint**: `/todos`
-**Method**: `GET`
-**Description**: Retrieves all To-Do items sorted by createdAt in descending order.
-**Response**
+-   **Endpoint**: `/todos`
+-   **Method**: `GET`
+-   **Description**: Retrieves all To-Do items sorted by createdAt in descending order.
+-   **Response**
 ```json
 {
   "status": "success",
@@ -147,16 +138,16 @@ Run the container: npm run docker:run
 }
 ```
 
-### Get a Specific To-Do
+### 3. Get a Specific To-Do
 
-**Endpoint**: `/todos/:id`
-**Method**: `GET`
-**Description**: Retrieves a single To-Do item by its ID.
+-   **Endpoint**: `/todos/:id`
+-   **Method**: `GET`
+-   **Description**: Retrieves a single To-Do item by its ID.
 
-**Request Parameters**
-`id (string)`: The ID of the To-Do item.
+-   **Request Parameters**
+-   `id (string)`: The ID of the To-Do item.
 
-**Response**
+-   **Response**
 ```json
 {
   "status": "success",
@@ -172,7 +163,7 @@ Run the container: npm run docker:run
 }
 ```
 
-**Error Response**
+-   **Error Response**
 ```json
 {
   "status": "error",
@@ -180,17 +171,17 @@ Run the container: npm run docker:run
 }
 ```
 
-### Update a To-Do
+### 4. Update a To-Do
 
-**Endpoint**: `/todos/:id`
-**Method**: `PUT`
-Description: Updates the content, status, or due date of an existing To-Do item.
+-   **Endpoint**: `/todos/:id`
+-   **Method**: `PUT`
+-   **Description**: Updates the content, status, or due date of an existing To-Do item.
 
-**Request Parameters**
+-   **Request Parameters**
 
-`id (string)`: The ID of the To-Do item.
+-   `id (string)`: The ID of the To-Do item.
 
-**Request Body**
+-   **Request Body**
 ```json
 {
   "content": "Update project documentation",
@@ -198,13 +189,13 @@ Description: Updates the content, status, or due date of an existing To-Do item.
   "dueDate": "2024-12-21T00:00:00.000Z"
 }
 ```
-**Response**
+-   **Response**
 ```json
 {
   "message": "To-Do updated successfully."
 }
 ```
-**Error Response**
+-   **Error Response**
 ```json
 {
   "status": "error",
@@ -212,24 +203,24 @@ Description: Updates the content, status, or due date of an existing To-Do item.
 }
 ```
 
-### Delete a To-Do
+### 5. Delete a To-Do
 
-**Endpoint**: `/todos/:id`
-**Method**: `DELETE`
-**Description**: Deletes an existing To-Do item.
+-   **Endpoint**: `/todos/:id`
+-   **Method**: `DELETE`
+-   **Description**: Deletes an existing To-Do item.
 
-**Request Parameters**
+-   **Request Parameters**
 
-`id (string)`: The ID of the To-Do item.
+-   `id (string)`: The ID of the To-Do item.
 
-**Response**
+-   **Response**
 ```json
 {
   "message": "To-Do deleted successfully."
 }
 ```
 
-**Error Response**
+-   **Error Response**
 ```json
 {
   "status": "error",
@@ -238,19 +229,25 @@ Description: Updates the content, status, or due date of an existing To-Do item.
 ```
 
 ### Common Errors
-`400 Bad Request`: Invalid inputs.
-`404 Not Found`: Resource not found.
-`500 Internal Server Error`: Unexpected server error.
+-   `400 Bad Request`: Invalid inputs.
+-   `404 Not Found`: Resource not found.
+-   `500 Internal Server Error`: Unexpected server error.
 
 ### Running the API
 
-**Development Mode:**
+-   **Installation**
+
+```bash
+npm install
+```
+
+-   **Development Mode:**
 
 ```bash
 npm run dev
 ```
 
-**Production Mode:**
+-   **Production Mode:**
 
 ```bash
 npm run start
@@ -258,11 +255,11 @@ npm run start
 
 ### Docker:
 
-**Build the image:**
+-   **Build the image:**
 ```bash
 npm run docker:build
 ```
-**Run the container:**
+-   **Run the container:**
 ```bash
 npm run docker:run
 ```
