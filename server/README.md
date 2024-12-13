@@ -79,6 +79,40 @@ src/
 -   **dist/:**
 -   Contains the compiled JavaScript files, generated from the TypeScript source code.
 
+### Running the API
+
+- **Configuration**
+- Add a .env file (see .env.example) and specify your PORT and CLIENT_URL. The CLIENT_URL is used for CORS permissions.
+
+-   **Installation**
+
+```bash
+npm install
+```
+
+-   **Development Mode:**
+
+```bash
+npm run dev
+```
+
+-   **Production Mode:**
+
+```bash
+npm run start
+```
+
+### Docker:
+
+-   **Build the image:**
+```bash
+npm run docker:build
+```
+-   **Run the container:**
+```bash
+npm run docker:run
+```
+
 ### Endpoints:
 
 ### 1. Create a New To-Do
@@ -232,34 +266,3 @@ src/
 -   `400 Bad Request`: Invalid inputs.
 -   `404 Not Found`: Resource not found.
 -   `500 Internal Server Error`: Unexpected server error.
-
-### Running the API
-
--   **Installation**
-
-```bash
-npm install
-```
-
--   **Development Mode:**
-
-```bash
-npm run dev
-```
-
--   **Production Mode:**
-
-```bash
-npm run start
-```
-
-### Docker:
-
--   **Build the image:**
-```bash
-npm run docker:build
-```
--   **Run the container:**
-```bash
-npm run docker:run
-```
